@@ -1,0 +1,21 @@
+:root {
+  --main-color: #2e6571;
+}
+
+* {
+  font-family: Roboto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}

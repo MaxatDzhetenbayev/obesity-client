@@ -1,0 +1,33 @@
+.welcome {
+  background: url("images/welcome.png");
+  width: 100%;
+  height: calc(100vh - 80px);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome__wrapper {
+  max-width: 980px;
+  padding: 80px 40px;
+  border-radius: 8px;
+
+  background-color: #000000ba;
+
+  color: #fff;
+}
+
+.welcome__wrapper h1 {
+  text-align: center;
+  font-size: clamp(24px, 3vw, 48px);
+}
+
+.welcome__wrapper p {
+  margin-top: 40px;
+  text-align: justify;
+  font-size: clamp(18px, 3vw, 32px);
+}

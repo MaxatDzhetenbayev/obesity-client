@@ -1,0 +1,23 @@
+.calculator__modal__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: #0000007b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator__modal__content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

@@ -1,0 +1,14 @@
+.calculator {
+  margin-top: 100px;
+}
+
+.calculator__group {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 679px) {
+  .calculator__group {
+    flex-direction: column;
+  }
+}
