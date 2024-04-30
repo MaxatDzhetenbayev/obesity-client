@@ -15,6 +15,10 @@
   gap: 40px;
 }
 
+.test__banner h1 {
+  flex: 1;
+}
+
 @media (max-width: 763px) {
   .test__banner__row {
     justify-content: center;
@@ -29,7 +33,7 @@
   font-size: clamp(24px, 3vw, 32px);
 }
 
-.test__banner button {
+.test__banner a {
   border: none;
   border-radius: 8px;
 
@@ -40,7 +44,7 @@
 }
 
 /* CSS */
-.test__banner button {
+.test__banner a {
   padding: 20px 40px;
 
   border: solid transparent;
@@ -59,7 +63,7 @@
   transition: filter 0.2s;
 }
 
-.test__banner button:after {
+.test__banner a:after {
   background-clip: padding-box;
   background-color: #fff;
   border: solid transparent;
@@ -74,12 +78,12 @@
   z-index: -1;
 }
 
-.test__banner button:hover:not(:disabled) {
+.test__banner a:hover:not(:disabled) {
   filter: brightness(1.1);
   -webkit-filter: brightness(1.1);
 }
 
-.test__banner button:active {
+.test__banner a:active {
   border-width: 4px 0 0;
   background: none;
 }

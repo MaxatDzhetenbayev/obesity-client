@@ -1,4 +1,4 @@
-.calculator__modal__wrapper {
+.modal__wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,12 +12,70 @@
   justify-content: center;
 }
 
-.calculator__modal__content {
+.modal__content {
   padding: 20px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
 
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal__header button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  background-color: transparent;
+  transition: all 0.3s;
+}
+
+.modal__header button:hover {
+  background-color: #000;
+}
+
+.modal__header button:hover svg {
+  color: #fff;
+}
+
+.modal__section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 40px;
+}
+
+.modal__section input {
+  align-self: center;
+  max-width: 75px;
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+}
+
+.modal__section button {
+  padding: 10px 30px;
+  font-weight: 600;
+  text-align: center;
+
+  border-radius: 25px;
+  border: none;
+
+  cursor: pointer;
+
+  background-color: #0076fd;
+  color: #fff;
 }

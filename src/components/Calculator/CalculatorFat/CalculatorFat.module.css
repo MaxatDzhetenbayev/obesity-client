@@ -49,7 +49,7 @@
   justify-content: space-between;
 }
 .calculator__footer__item:not(:last-child) {
-  border-bottom: 1px solid #697391;
+  border-bottom: 1px solid #0076fd;
 }
 
 .calculator__footer__item button {

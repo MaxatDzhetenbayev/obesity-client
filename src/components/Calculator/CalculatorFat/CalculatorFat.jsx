@@ -58,7 +58,8 @@ export const CalculatorFat = () => {
       setResultText("Фитнес");
     } else if (resultProcentage > 25 && resultProcentage < 32) {
       setResultText("Приемлимый");
-    } else if (resultProcentage > 32) {
+    } else if (resultProcentage > 32) {м
+		
       setResultText("Ожирение");
     }
   }
@@ -120,6 +121,7 @@ export const CalculatorFat = () => {
                   styles.calculator__content__button__blue
                 )}
                 onClick={showResultContent}
+                disabled={true}
               >
                 Вычислить
               </button>
@@ -169,8 +171,12 @@ export const CalculatorFat = () => {
         </footer>
       </section>
 
-      <Modal isView={isViewModal}>
-        <input type="text" onChange={(e) => saveInput(e.target.value)} />
+      <Modal isView={isViewModal} onClose={() => setIsViewModal(false)}>
+        <input
+          type="text"
+          onChange={(e) => saveInput(e.target.value)}
+          autoFocus
+        />
         <button onClick={() => setIsViewModal(false)}>Сохранить</button>
       </Modal>
     </>

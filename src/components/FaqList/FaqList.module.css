@@ -1,0 +1,36 @@
+.questionList {
+  margin-top: 40px;
+  width: 100%;
+
+  list-style-type: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.questionItem {
+  width: 100%;
+}
+
+.questionItem_button {
+  width: 100%;
+  border: none;
+  padding: 20px;
+
+  font-size: clamp(20px, 3vw, 24px);
+
+  text-align: left;
+  cursor: pointer;
+}
+
+.questionItem_info {
+  border: 3px #efefef solid;
+  border-top: none;
+
+  text-align: justify;
+}
+
+.questionItem_info p {
+  font-size: clamp(18px, 3vw, 22px);
+}
