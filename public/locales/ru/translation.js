@@ -1,4 +1,5 @@
 const translation = {
+	language: "Русский",
   menu: {
     main: "Главная",
     questionnaire: "Опросник",
