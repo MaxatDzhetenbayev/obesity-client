@@ -1,4 +1,4 @@
-import { Container } from "../components/UI/Container/Container";
+import { Container } from '@mui/material';
 import { FaqList } from "../components/FaqList/FaqList";
 
 export const FaqPage = () => {

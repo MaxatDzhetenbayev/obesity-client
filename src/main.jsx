@@ -8,6 +8,7 @@ import { MainPage } from "./pages/MainPage.jsx";
 import { QuestionnairePage } from "./pages/QuestionnairePage.jsx";
 import { CalculatorPage } from "./pages/CalculatorPage.jsx";
 import { FaqPage } from "./pages/FaqPage.jsx";
+import  './firebaseConfig.js'
 
 const router = createBrowserRouter([
   {

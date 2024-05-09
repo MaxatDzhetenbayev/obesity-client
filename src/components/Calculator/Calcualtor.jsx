@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Calcualtor.module.css";
-import { Container } from "../UI/Container/Container";
 import { CalculatorRatio } from "./CalculatorRatio/CalculatorRatio";
 import { CalculatorFat } from "./CalculatorFat/CalculatorFat";
+import { Container } from '@mui/material';
 export const Calcualtor = () => {
   return (
     <Container>

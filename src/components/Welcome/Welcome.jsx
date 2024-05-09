@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Welcome.module.css";
-import { Container } from "../UI/Container/Container";
 import { useTranslation } from "react-i18next";
+import { Container } from '@mui/material';
 export const Welcome = () => {
   const { t } = useTranslation();
 

@@ -1,10 +1,9 @@
 import React from "react";
-import clsn from "classnames";
 import styles from "./BaseLayout.module.css";
-import { Container } from "../../components/UI/Container/Container";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Header } from "../../components/UI/Header/Header";
+import { Header } from "../../components/Header/Header";
+import { Container } from "@mui/material";
 export const BaseLayout = () => {
   const { t } = useTranslation();
   return (

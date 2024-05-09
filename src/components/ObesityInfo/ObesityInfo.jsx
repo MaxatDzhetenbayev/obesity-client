@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ObesityInfo.module.css";
 import { Trans, useTranslation } from "react-i18next";
-import { Container } from "../UI/Container/Container";
+import { Container } from '@mui/material';
 
 export const ObesityInfo = () => {
   const { t } = useTranslation();
