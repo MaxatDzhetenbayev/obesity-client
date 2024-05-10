@@ -161,7 +161,7 @@ export const CalculatorRatio = () => {
           autoFocus
           onChange={(e) => saveInput(e.target.value)}
         />
-        <button onClick={() => setIsViewModal(false)}>Сохранить</button>
+        <button onClick={() => setIsViewModal(false)}>{t("save")}</button>
       </Modal>
     </>
   );

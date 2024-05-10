@@ -2,31 +2,35 @@ import React, { useState } from "react";
 import styles from "./CalculatorFat.module.css";
 import clsn from "classnames";
 import { Modal } from "../../UI/Modal/Modal";
+import { useTranslation } from "react-i18next";
 
 const resultContentList = [
   {
-    title: "Необходимый жир",
+    title: "calculator.essential_fat",
     precentage: "10%-14%",
   },
   {
-    title: "Атлеты",
+    title: "calculator.athletes",
     precentage: "15%-21%",
   },
   {
-    title: "Фитнес",
+    title: "calculator.fitness",
     precentage: "22%-25%",
   },
   {
-    title: "Приемлимый",
+    title: "calculator.acceptable",
     precentage: "26%-32%",
   },
   {
-    title: "Ожирение",
+    title: "calculator.obesity",
     precentage: ">32%",
   },
 ];
 
 export const CalculatorFat = () => {
+
+  const {t} = useTranslation()
+
   const [isViewModal, setIsViewModal] = useState(false);
 
   const [waist, setWaist] = useState(null);
@@ -44,23 +48,23 @@ export const CalculatorFat = () => {
           0.19077 * Math.log10(waist - neck) +
           0.15456 * Math.log10(height)) -
       450;
-
+          console.log(calculateResult)
     setResultProcentage(calculateResult.toFixed(1));
     handleResultText(calculateResult);
   }
 
   function handleResultText(resultProcentage) {
-    if (resultProcentage >= 10 && resultProcentage <= 14) {
-      setResultText("Необходимый жир");
+    console.log(resultProcentage)
+    if ( resultProcentage <= 14) {
+      setResultText("essential_fat");
     } else if (resultProcentage > 14 && resultProcentage < 21) {
-      setResultText("Атлеты");
+      setResultText("athletes");
     } else if (resultProcentage > 21 && resultProcentage < 25) {
-      setResultText("Фитнес");
+      setResultText("fitness");
     } else if (resultProcentage > 25 && resultProcentage < 32) {
-      setResultText("Приемлимый");
-    } else if (resultProcentage > 32) {м
-		
-      setResultText("Ожирение");
+      setResultText("acceptable");
+    } else if (resultProcentage >= 32) {
+      setResultText("obesity");
     }
   }
 
@@ -75,8 +79,8 @@ export const CalculatorFat = () => {
   };
 
   function showResultContent() {
+    console.log("213")
     if (neck != null && waist != null && height != null) {
-      console.log("work");
 
       handleFatCalucalte();
     }
@@ -84,14 +88,14 @@ export const CalculatorFat = () => {
   return (
     <>
       <section className={styles.calculator__item}>
-        <h2>Процент жира</h2>
+        <h2>{t("calculator.fat_procentage")}</h2>
         <section className={styles.calculator__content}>
           {resultProcentage ? (
             <section className={styles.calculator__result}>
               <p className={styles.calculator__result__percentage}>
                 {resultProcentage} %
               </p>
-              <p className={styles.calculator__result__text}>{resultText}</p>
+              <p className={styles.calculator__result__text}>{t("calculator." +resultText)}</p>
               <p className={styles.calculator__result__sub}>
                 {Number(neck).toFixed(2)} см {Number(waist).toFixed(2)} см{" "}
                 {Number(height).toFixed(2)} см
@@ -101,10 +105,10 @@ export const CalculatorFat = () => {
                   <li
                     className={clsn(styles.calculator__result__item, {
                       [styles.calculator__result__item__changed]:
-                        resultText == item.title,
+                        resultText == item.title.split(".")[1],
                     })}
                   >
-                    <p>{item.title}</p> <p>{item.precentage}</p>
+                    <p>{t(item.title)}</p> <p>{item.precentage}</p>
                   </li>
                 ))}
               </ul>
@@ -112,8 +116,7 @@ export const CalculatorFat = () => {
           ) : (
             <section className={styles.calculator__info}>
               <p>
-                Процент жировой ткани в теле позволяет измерить, сколько
-                процентов вашего тела составляет жир.
+                {t("calculator.fat_procentage__text")}
               </p>
               <button
                 className={clsn(
@@ -121,52 +124,48 @@ export const CalculatorFat = () => {
                   styles.calculator__content__button__blue
                 )}
                 onClick={showResultContent}
-                disabled={true}
               >
-                Вычислить
+                {t("calculate")}
               </button>
             </section>
           )}
         </section>
         <footer className={styles.calculator__footer}>
           <section className={styles.calculator__footer__item}>
-            <p>Шея</p>
+            <p>{t("calculator.neck")}</p>
             <button onClick={() => showModal("neck")}>
               {neck ? (
                 <>
                   {neck} см <span>{">"}</span>
                 </>
               ) : (
-                "добавить"
-              )}
+                t("add")
+              )
+              }
             </button>
           </section>
           <section className={styles.calculator__footer__item}>
-            <p>Рост</p>
+            <p>{t("calculator.height")}</p>
             <button onClick={() => showModal("height")}>
               {height ? (
                 <>
                   {height} см <span>{">"}</span>
                 </>
-              ) : (
-                "добавить"
-              )}
+              ) :  t("add")}
             </button>
           </section>
           <section className={styles.calculator__footer__item}>
-            <p>Талия</p>
+            <p>{t("calculator.waist")}</p>
             <button onClick={() => showModal("waist")}>
               {waist ? (
                 <>
                   {waist} см <span>{">"}</span>
                 </>
-              ) : (
-                "добавить"
-              )}
+              ) :  t("add")}
             </button>
           </section>
           {resultProcentage && (
-            <button onClick={handleFatCalucalte}>Рассчитать</button>
+            <button style={{marginTop: "10px"}} className={styles.calculator__content__button} onClick={handleFatCalucalte}>{t("calculate")}</button>
           )}
         </footer>
       </section>
@@ -177,7 +176,7 @@ export const CalculatorFat = () => {
           onChange={(e) => saveInput(e.target.value)}
           autoFocus
         />
-        <button onClick={() => setIsViewModal(false)}>Сохранить</button>
+        <button  onClick={() => setIsViewModal(false)}>{t("save")}</button>
       </Modal>
     </>
   );
