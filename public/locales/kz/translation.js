@@ -5,6 +5,7 @@ const translation = {
     questionnaire: "Сауалнама",
     online_calculator: "Онлайн калькулятор",
     faq: "Жиі қойылатын сұрақтар",
+    facts: "Деректер",
   },
   welcome: {
     title: "СЕМІЗДІК ЖӘНЕ АРТЫҚ САЛМАҚ",

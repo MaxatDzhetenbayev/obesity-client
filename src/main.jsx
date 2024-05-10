@@ -9,6 +9,7 @@ import { QuestionnairePage } from "./pages/QuestionnairePage.jsx";
 import { CalculatorPage } from "./pages/CalculatorPage.jsx";
 import { FaqPage } from "./pages/FaqPage.jsx";
 import  './firebaseConfig.js'
+import { FactsPage } from "./pages/FactsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "/faq",
         element: <FaqPage />,
       },
+      {
+        path: "/facts/:fact",
+        element: <FactsPage />,
+      }
     ],
   },
 ]);

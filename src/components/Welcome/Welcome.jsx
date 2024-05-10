@@ -7,7 +7,7 @@ export const Welcome = () => {
 
   return (
     <section class={styles.welcome}>
-      <Container>
+      <Container sx={{display: "flex", justifyContent: "center"}}>
         <section class={styles.welcome__wrapper}>
           <h1>{t("welcome.title")}</h1>
           <p>{t("welcome.text")}</p>

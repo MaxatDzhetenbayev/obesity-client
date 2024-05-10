@@ -10,6 +10,8 @@ import {
   useMediaQuery,
   Button,
   Drawer,
+  MenuItem,
+  Menu as MuiMenu,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +21,27 @@ const menuList = [
   {
     title: "menu.main",
     path: "/",
+  },
+  {
+    title: "menu.facts",
+    children: [
+      {
+        title: "Распространенность",
+        path: "facts/popularity"
+      },
+      {
+        title: "Симптомы",
+        path: "facts/symptoms"
+      },
+      {
+        title: "Предотвращение",
+        path: "facts/prevention"
+      },
+      {
+        title: "Распространенность",
+        path: "facts/popularity"
+      },
+    ]
   },
   {
     title: "menu.questionnaire",
@@ -34,9 +57,51 @@ const menuList = [
   },
 ];
 
+const MenuList = ({ items }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const childMenuOpen = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <List sx={{display: "flex", gap: "10px"}}>
+      {items.map((item) => (
+        <>
+        <ListItemButton key={item.title} onClick={(e) => item.children ? handleClick(e) : navigate(item.path)}>
+          <ListItemText>{t(item.title)}</ListItemText>
+        </ListItemButton>
+          {
+            item.children && (
+              <MuiMenu
+                anchorEl={anchorEl}
+                open={childMenuOpen}
+                onClose={() => handleClose(null)}
+              >
+                {item.children.map((child) => (
+                  <MenuItem key={child.title} onClick={() => navigate(child.path)}>
+                    {t(child.title)}
+                  </MenuItem>
+                ))}
+              </MuiMenu>
+            )
+          }
+        </>
+      ))}
+    </List>
+  )
+}
+
 export const Menu = () => {
   const isViewMenuBurger = useMediaQuery("(max-width: 900px)");
-  const { t} = useTranslation();
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -62,13 +127,7 @@ export const Menu = () => {
   return (
     <>
       {!isViewMenuBurger ? (
-        <Box>
-          {menuList.map((item) => (
-            <Button variant="" onClick={() => navigate(item.path)}>
-              <Typography>{t(item.title)}</Typography>
-            </Button>
-          ))}
-        </Box>
+        <MenuList items={menuList} />
       ) : (
         <IconButton onClick={toggleDrawer(true)}>
           <MenuIcon sx={{ color: "#fff" }} />

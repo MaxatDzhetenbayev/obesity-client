@@ -5,6 +5,7 @@ const translation = {
     questionnaire: "Опросник",
     online_calculator: "Онлайн калькулятор",
     faq: "Часто задаваемые вопросы",
+    facts: "Факты"
   },
   welcome: {
     title: "ОЖИРЕНИ Е И ИЗБЫТОЧНЫЙ ВЕС",
