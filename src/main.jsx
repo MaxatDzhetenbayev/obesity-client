@@ -10,6 +10,7 @@ import { CalculatorPage } from "./pages/CalculatorPage.jsx";
 import { FaqPage } from "./pages/FaqPage.jsx";
 import  './firebaseConfig.js'
 import { FactsPage } from "./pages/FactsPage.jsx";
+import { AdminPage } from "./pages/AdminPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/facts/:fact",
         element: <FactsPage />,
+      },
+      {
+        path: "/admin",
+        element: <AdminPage />,
       }
     ],
   },

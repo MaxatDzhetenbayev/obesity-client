@@ -284,7 +284,6 @@ const questionsData = {
 const stagesList = ["knowledge", "attitude", "action"];
 
 export const QuestionnairePage = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
@@ -341,65 +340,13 @@ export const QuestionnairePage = () => {
     navigate("/");
   };
 
-  const [data, setData] = useState([]);
-  const [result, setResult] = useState();
-
-  const handleResultPreparation = () => {
-    setResult(
-      data.map(({ id, answers, ...user }) => {
-        const answersSheet = {};
-        answers.forEach((item) => {
-          answersSheet[`${item.question}`] = item.answer;
-        });
-
-        return {
-          ...{
-            Имя: user.name,
-            Возраст: user.age,
-            Национальность: user.nationality,
-            Рост: user.height,
-            Вес: user.weight,
-            Пульс: user.pulse,
-          },
-          ...answersSheet,
-        };
-      })
-    );
-  };
-
-  const handleDownload = () => {
-    const ws = utils.json_to_sheet(result);
-    const wb = utils.book_new();
-    utils.book_append_sheet(wb, ws, "Data");
-    writeFile(
-      wb,
-      "Отчет Опросника на тему «Медико - социальные аспекты профилактики избыточного веса и ожирения».xlsx"
-    );
-  };
-
-  useEffect(() => {
-    const getAllClientResults = async () => {
-      const resultsCollectionRef = collection(db, "results");
-      const querySnapshot = await getDocs(resultsCollectionRef);
-      const results = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setData(results);
-    };
-
-    getAllClientResults();
-  }, []);
-  useEffect(() => {
-    handleResultPreparation();
-  }, [data]);
+ 
 
   return (
     <Container>
       <Paper elevation={2} sx={{ padding: "20px 10px", marginTop: "40px" }}>
         {!isStarted && (
           <div>
-            <Button onClick={handleDownload}>Скачать</Button>
             <QuestionnaireBlank
               userInfo={userInfo}
               setUserInfo={setUserInfo}
