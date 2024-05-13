@@ -5,7 +5,7 @@ import { SwitchLanguage } from "./SwitchLanguage/SwitchLanguage";
 
 export const Header = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{bgcolor: "#2e6571"}}>
       <Container>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <HeaderMenu />
@@ -15,3 +15,4 @@ export const Header = () => {
     </AppBar>
   );
 };
+
