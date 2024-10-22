@@ -43,16 +43,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <TextField
-            required
-            label={t("questionnaire.blank.field.name.label")}
-            helperText={t("questionnaire.blank.field.name.helper")}
-            variant="standard"
-            value={userInfo.name}
-            onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, name: e.target.value }))
-            }
-          />
+
           <TextField
             required
             label={t("questionnaire.blank.field.age.label")}

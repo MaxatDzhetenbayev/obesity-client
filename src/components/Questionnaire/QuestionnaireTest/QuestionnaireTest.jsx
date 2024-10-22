@@ -1,8 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const QuestionnaireTest = ({ stage, currentQuestion, nextQuestion }) => {
   const { title: questionTitle, options } = currentQuestion;
+
+  const { i18n: { language } } = useTranslation()
 
   return (
     <Box>
@@ -13,7 +16,7 @@ export const QuestionnaireTest = ({ stage, currentQuestion, nextQuestion }) => {
         {questionTitle}
       </Typography>
       <Box display="flex" flexDirection="column" marginTop="30px">
-        {options.map((answer, index) => (
+        {options[language].map((answer, index) => (
           <Button
             key={index}
             onClick={() => nextQuestion(questionTitle, answer)}
