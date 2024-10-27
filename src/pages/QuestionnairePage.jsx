@@ -26,11 +26,14 @@ export const QuestionnairePage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [stages, setStages] = useState("knowledge");
-  const { i18n: { language } } = useTranslation();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const [answers, setAnswers] = useState([]);
+  console.log(answers);
 
   const handleSetAnswer = (question, answer) => {
     setAnswers((prev) => [...prev, { question, answer }]);
@@ -66,14 +69,12 @@ export const QuestionnairePage = () => {
       console.error("Ошибка при отправлении результата: ", error);
     }
 
-
     // navigate("/");
   };
 
   // Функция для получения правильного языка
   const getTranslatedContent = (content) => {
-    console.log(content)
-    return content[language] || content['ru']; // На случай, если нет перевода, используем русский по умолчанию
+    return content[language] || content["ru"]; // На случай, если нет перевода, используем русский по умолчанию
   };
 
   return (
@@ -93,7 +94,7 @@ export const QuestionnairePage = () => {
             stage={getTranslatedContent(questionsData[stages].title)} // Переводим заголовок
             currentQuestion={{
               ...questionsData[stages].questions[currentQuestion],
-              title: getTranslatedContent(questionsData[stages].questions[currentQuestion].title) // Переводим вопрос
+              title: questionsData[stages].questions[currentQuestion].title,
             }}
             nextQuestion={handleNextQuestion}
           />

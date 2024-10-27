@@ -4,8 +4,10 @@ import { useTranslation } from "react-i18next";
 
 export const QuestionnaireTest = ({ stage, currentQuestion, nextQuestion }) => {
   const { title: questionTitle, options } = currentQuestion;
-
-  const { i18n: { language } } = useTranslation()
+  console.log(questionTitle);
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   return (
     <Box>
@@ -13,13 +15,15 @@ export const QuestionnaireTest = ({ stage, currentQuestion, nextQuestion }) => {
         {stage}
       </Typography>
       <Typography textAlign="center" marginTop="30px">
-        {questionTitle}
+        {questionTitle[language]}
       </Typography>
       <Box display="flex" flexDirection="column" marginTop="30px">
         {options[language].map((answer, index) => (
           <Button
             key={index}
-            onClick={() => nextQuestion(questionTitle, answer)}
+            onClick={() =>
+              nextQuestion(questionTitle["ru"], options["ru"][index])
+            }
           >
             {answer}
           </Button>
