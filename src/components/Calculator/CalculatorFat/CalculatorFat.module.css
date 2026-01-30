@@ -8,7 +8,8 @@
 }
 
 .calculator__item h2 {
-  font-size: clamp(20px, 3vw, 24px);
+  font-size: clamp(20px, 2.5vw, 24px);
+  font-weight: 700;
 }
 
 .calculator__content {
@@ -24,14 +25,12 @@
 
 .calculator__content__button {
   padding: 10px 30px;
+  font-size: var(--text-base);
   font-weight: 600;
   text-align: center;
-
   border-radius: 25px;
   border: none;
-
   cursor: pointer;
-
   background-color: #0076fd;
   color: #fff;
 }
@@ -55,10 +54,9 @@
 .calculator__footer__item button {
   background-color: transparent;
   border: none;
-
+  font-size: var(--text-base);
   color: #533fb8;
   font-weight: 900;
-
   cursor: pointer;
 }
 
@@ -84,23 +82,20 @@
 
 .calculator__result__percentage {
   text-align: left;
-
   color: #ff679a;
-
-  font-size: 48px;
+  font-size: clamp(36px, 4vw, 48px);
   font-weight: 900;
 }
 
 .calculator__result__text {
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 24px);
   font-weight: 900;
-
   color: #ff679a;
 }
 
 .calculator__result__sub {
   margin-top: 5px;
-
+  font-size: var(--text-base);
   color: #697391;
 }
 
@@ -113,10 +108,9 @@
 .calculator__result__item {
   padding: 10px 20px;
   border-radius: 20px;
-
   display: flex;
   justify-content: space-between;
-
+  font-size: var(--text-base);
   color: #646f91;
 }
 

@@ -29,3 +29,30 @@ export const BLANK_FIELD_LABELS_RU = {
   height: "Рост (см)",
   weight: "Вес (кг)",
 };
+
+/** Перевод значений полей на русский для отчёта (ключ поля -> ключ значения -> русская подпись) */
+export const BLANK_FIELD_VALUE_LABELS_RU = {
+  gender: {
+    male: "Мужской",
+    female: "Женский",
+  },
+  nationality: {
+    kazakh: "Казах",
+    russian: "Русский",
+    uzbek: "Узбек",
+    tajik: "Таджик",
+    kyrgyz: "Киргиз",
+    turkmen: "Туркмен",
+    other: "Другое",
+  },
+  residenceType: {
+    city: "Город",
+    village: "Село",
+  },
+  education: {
+    higher: "Высшее",
+    secondary_special: "Среднее специальное",
+    secondary: "Среднее",
+    other: "Другое",
+  },
+};

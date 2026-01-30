@@ -1,20 +1,39 @@
 :root {
   --main-color: #2e6571;
+  /* Типографика: базовый 16px, заголовки и акценты */
+  --text-sm: 15px;
+  --text-base: 16px;
+  --text-md: 17px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 22px;
+  --heading-3: 20px;
+  --heading-2: 24px;
+  --heading-1: 28px;
+  --display: 32px;
+}
+
+html {
+  font-size: 16px;
 }
 
 * {
-  font-family: Roboto;
+  font-family: 'Nunito', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 
 a {
   text-decoration: none;
   color: #000;
 }
 
+p {
+  font-size: var(--text-md);
+  line-height: 1.5;
+  text-align: justify;
+}
 
 .questionnaire{
   padding: 25px 40px; 
@@ -27,8 +46,4 @@ a {
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
-}
-
-p{
-  text-align: justify;
 }

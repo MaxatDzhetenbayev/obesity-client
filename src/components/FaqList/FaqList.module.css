@@ -17,9 +17,8 @@
   width: 100%;
   border: none;
   padding: 20px;
-
-  font-size: clamp(20px, 3vw, 24px);
-
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
   text-align: left;
   cursor: pointer;
 }
@@ -32,5 +31,6 @@
 }
 
 .questionItem_info p {
-  font-size: clamp(18px, 3vw, 22px);
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.5;
 }

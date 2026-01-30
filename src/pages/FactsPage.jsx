@@ -48,7 +48,7 @@ export const FactsPage = () => {
       {/* <EditText/> */}
       <Typography
         mt="30px"
-        sx={{ fontSize: "clamp(36px, 4vw, 42px)" }}
+        sx={{ fontSize: "clamp(26px, 3vw, 32px)", fontWeight: 700 }}
         variant="h3"
       >
         {factContent.title}

@@ -3,8 +3,8 @@
 }
 
 .degree__obesity__title {
-  font-size: clamp(28px, 3vw, 38px);
-
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 700;
   text-align: center;
 }
 
@@ -33,8 +33,8 @@
 }
 
 .degree__obesity__mass h3 {
-  font-size: clamp(16px, 3vw, 36px);
-
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
   text-align: center;
 }
 
@@ -45,7 +45,8 @@
 
 .degree__obesity__content p {
   margin-top: 10px;
-  font-size: clamp(14px, 1.5vw, 18px);
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.5;
 }
 
 .degree__obesity__item:nth-child(1) .degree__obesity__mass {
@@ -68,7 +69,7 @@
   }
 
   .degree__obesity__mass h3 {
-    font-size: clamp(28px, 3vw, 36px);
+    font-size: clamp(20px, 3vw, 26px);
   }
 }
 

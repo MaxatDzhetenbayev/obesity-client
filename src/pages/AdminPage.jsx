@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Button, Container, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
@@ -13,7 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { BLANK_FIELD_KEYS, BLANK_FIELD_LABELS_RU } from "../constants/blankForm";
+import { BLANK_FIELD_KEYS, BLANK_FIELD_LABELS_RU, BLANK_FIELD_VALUE_LABELS_RU } from "../constants/blankForm";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -82,7 +82,10 @@ export const AdminPage = () => {
       results.map(async (r) => {
         const row = {};
         BLANK_FIELD_KEYS.forEach((key) => {
-          row[BLANK_FIELD_LABELS_RU[key] ?? key] = r[key] ?? "";
+          const raw = r[key] ?? "";
+          const valueMap = BLANK_FIELD_VALUE_LABELS_RU[key];
+          const cellValue = valueMap && raw && valueMap[raw] != null ? valueMap[raw] : raw;
+          row[BLANK_FIELD_LABELS_RU[key] ?? key] = cellValue;
         });
         row["Опросник"] = questionnaire ? (questionnaire[`title_${lang}`] ?? questionnaire.title_ru ?? questionnaire.title_kz) : selectedQuestionnaireId;
         const answersSnap = await getDocs(
@@ -170,6 +173,11 @@ export const AdminPage = () => {
       >
         Скачать результаты выбранного опросника
       </Button>
+      {selectedQuestionnaireId && results.length === 0 && (
+        <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>
+          Нет сохранённых результатов по этому опроснику. Кнопка станет активной после того, как пользователи пройдут опрос и отправят ответы.
+        </Typography>
+      )}
       <Bar options={options} data={barData} sx={{ mt: 4 }} />
     </Container>
   );

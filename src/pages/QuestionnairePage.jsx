@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where, doc, setDoc } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebaseConfig";
 import { QuestionnaireBlank } from "../components/Questionnaire/QuestionnaireBlank/QuestionnaireBlank";
-import { Container, Paper, Typography, Box, Button, CircularProgress } from "@mui/material";
+import { Container, Paper, Typography, Box, CircularProgress, Snackbar, Alert } from "@mui/material";
 import { QuestionnaireTest } from "../components/Questionnaire/QuestionnaireTest/QuestionnaireTest";
 import { QuestionnaireResults } from "../components/Questionnaire/QuestionnaireResults/QuestionnaireResults";
 
 export const QuestionnairePage = () => {
-  const { i18n: { language } } = useTranslation();
+  const { t, i18n: { language } } = useTranslation();
+  const navigate = useNavigate();
   const lang = language === "kz" ? "kz" : "ru";
 
   const [questionnaires, setQuestionnaires] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const [selectedQuestionnaireId, setSelectedQuestionnaireId] = useState(null);
   const [userInfo, setUserInfo] = useState({
@@ -138,6 +141,9 @@ export const QuestionnairePage = () => {
         })
       );
       await Promise.all(batch);
+
+      setSnackbarOpen(true);
+      setTimeout(() => navigate("/"), 2000);
     } catch (e) {
       setError(e.message);
     }
@@ -162,25 +168,59 @@ export const QuestionnairePage = () => {
 
   return (
     <Container>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity="success">
+          {t("questionnaire.sendSuccess")}
+        </Alert>
+      </Snackbar>
       <Paper elevation={2} sx={{ padding: "20px 10px", marginTop: "40px" }}>
         {!selectedQuestionnaireId && (
           <Box sx={{ textAlign: "center", py: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Выберите опросник
+              {t("questionnaire.selectQuestionnaire")}
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1, maxWidth: 400, mx: "auto", mt: 2 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 560, mx: "auto", mt: 3 }}>
               {questionnaires.length === 0 ? (
-                <Typography color="text.secondary">Нет доступных опросников</Typography>
+                <Typography color="text.secondary">{t("questionnaire.noQuestionnaires")}</Typography>
               ) : (
                 questionnaires.map((q) => (
-                  <Button
+                  <Paper
                     key={q.id}
-                    variant="outlined"
+                    elevation={0}
                     onClick={() => setSelectedQuestionnaireId(q.id)}
-                    sx={{ textAlign: "left", justifyContent: "flex-start" }}
+                    sx={{
+                      p: 2,
+                      textAlign: "left",
+                      cursor: "pointer",
+                      borderRadius: 2,
+                      border: "1px solid",
+                      borderColor: "divider",
+                      bgcolor: "background.paper",
+                      transition: "all 0.2s ease",
+                      "&:hover": {
+                        borderColor: "primary.main",
+                        boxShadow: 2,
+                        bgcolor: "action.hover",
+                      },
+                    }}
                   >
-                    {q[`title_${lang}`] || q.title_ru || q.title_kz || q.id}
-                  </Button>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "text.primary",
+                        fontWeight: 500,
+                        lineHeight: 1.4,
+                        textTransform: "none",
+                      }}
+                    >
+                      {q[`title_${lang}`] || q.title_ru || q.title_kz || q.id}
+                    </Typography>
+                  </Paper>
                 ))
               )}
             </Box>

@@ -36,7 +36,7 @@
 .navigation__items a {
   color: #000;
   font-weight: 700;
-  font-size: 21px;
+  font-size: var(--text-lg);
 }
 
 .header__adaptive__menu {
@@ -63,6 +63,7 @@
 .footer__col {
   padding: 20px 0;
   color: #fff;
+  font-size: var(--text-base);
 }
 
 .footer__text {

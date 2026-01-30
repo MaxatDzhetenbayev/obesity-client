@@ -15,6 +15,11 @@ export const QuestionnaireResults = ({ totalScore, levels, lang, handleSendResul
     const max = lev.max ?? 999;
     if (totalScore >= min && totalScore <= max) currentLevelIndex = i;
   });
+  // если балл вне всех диапазонов — выделяем ближайший: ниже минимума → уровень с наименьшим min, выше максимума → с наибольшим max
+  if (currentLevelIndex === -1 && levelList.length > 0) {
+    const globalMin = Math.min(...levelList.map((l) => l.min ?? 0));
+    currentLevelIndex = totalScore < globalMin ? levelList.length - 1 : 0;
+  }
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -22,12 +27,12 @@ export const QuestionnaireResults = ({ totalScore, levels, lang, handleSendResul
         {thanksText}
       </Typography>
       <Typography sx={{ marginTop: "16px" }} variant="h6">
-        Итоговый балл: {totalScore}
+        {t("questionnaire.totalScore")}: {totalScore}
       </Typography>
       {levelList.length > 0 && (
         <Box sx={{ marginTop: "24px", width: "100%", maxWidth: 400 }}>
           <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-            Уровень по шкале
+            {t("questionnaire.levelOnScale")}
           </Typography>
           <ul className={styles.scaleList}>
             {levelList.map((lev, i) => (
