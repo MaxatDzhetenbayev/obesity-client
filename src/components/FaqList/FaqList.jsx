@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./FaqList.module.css";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,36 @@ export const FaqList = () => {
     {
       question: () => t("faq.whats__obesity__title"),
       answer: () => t("faq.whats__obesity__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.consequences__title"),
+      answer: () => t("faq.consequences__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.causes__title"),
+      answer: () => t("faq.causes__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.types__title"),
+      answer: () => t("faq.types__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.daily_actions__title"),
+      answer: () => t("faq.daily_actions__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.household__title"),
+      answer: () => t("faq.household__text"),
+      isAnswerView: false,
+    },
+    {
+      question: () => t("faq.walking_after_meal__title"),
+      answer: () => t("faq.walking_after_meal__text"),
       isAnswerView: false,
     },
   ]);
@@ -43,6 +73,7 @@ export const FaqList = () => {
     <motion.ul className={styles.questionList}>
       {questionList.map((item) => (
         <motion.li
+          initial="closed"
           animate={item.isAnswerView ? "open" : "closed"}
           key={item.question()}
           className={styles.questionItem}
