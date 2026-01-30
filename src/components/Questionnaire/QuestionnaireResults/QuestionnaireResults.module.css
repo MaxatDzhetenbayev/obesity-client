@@ -1,0 +1,15 @@
+.scaleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scaleItem {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.scaleItemActive {
+  background-color: rgba(0, 118, 253, 0.12);
+  font-weight: 600;
+}

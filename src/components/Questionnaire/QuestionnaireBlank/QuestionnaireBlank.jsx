@@ -13,20 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 
-const nationalityKeys = [
-  "kazakh",
-  "russian",
-  "uzbek",
-  "tajik",
-  "kyrgyz",
-  "turkmen",
-  "other",
-];
-
-const educationKeys = ["higher", "secondary_special", "secondary", "other"];
+const NATIONALITY_KEYS = ["kazakh", "russian", "uzbek", "tajik", "kyrgyz", "turkmen", "other"];
+const EDUCATION_KEYS = ["higher", "secondary_special", "secondary", "other"];
 
 export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
   const { t } = useTranslation();
+
+  const update = (key, value) => setUserInfo((prev) => ({ ...prev, [key]: value }));
 
   return (
     <form
@@ -34,7 +27,9 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Container maxWidth="sm" disableGutters>
-        <Typography textAlign="center">{t("questionnaire.info")}</Typography>
+        <Typography textAlign="center" variant="body2" color="text.secondary">
+          {t("questionnaire.info")}
+        </Typography>
       </Container>
       <Typography sx={{ marginTop: "10px" }} textAlign="center" variant="h6">
         {t("questionnaire.title")}
@@ -56,32 +51,16 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
           variant="standard"
           value={userInfo.age}
           type="number"
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, age: e.target.value }))
-          }
+          onChange={(e) => update("age", e.target.value)}
         />
 
         <FormControl component="fieldset" required>
           <Typography component="span" variant="body2" color="text.secondary">
             {t("questionnaire.blank.field.gender.label")}
           </Typography>
-          <RadioGroup
-            row
-            value={userInfo.gender}
-            onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, gender: e.target.value }))
-            }
-          >
-            <FormControlLabel
-              value="male"
-              control={<Radio />}
-              label={t("questionnaire.blank.field.gender.male")}
-            />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label={t("questionnaire.blank.field.gender.female")}
-            />
+          <RadioGroup row value={userInfo.gender} onChange={(e) => update("gender", e.target.value)}>
+            <FormControlLabel value="male" control={<Radio />} label={t("questionnaire.blank.field.gender.male")} />
+            <FormControlLabel value="female" control={<Radio />} label={t("questionnaire.blank.field.gender.female")} />
           </RadioGroup>
         </FormControl>
 
@@ -91,12 +70,10 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
           label={t("questionnaire.blank.field.nationality.label")}
           helperText={t("questionnaire.blank.field.nationality.helper")}
           value={userInfo.nationality}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, nationality: e.target.value }))
-          }
+          onChange={(e) => update("nationality", e.target.value)}
           variant="standard"
         >
-          {nationalityKeys.map((key) => (
+          {NATIONALITY_KEYS.map((key) => (
             <MenuItem key={key} value={key}>
               {t("questionnaire.blank.nationality." + key)}
             </MenuItem>
@@ -108,35 +85,16 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
           helperText={t("questionnaire.blank.field.region.helper")}
           variant="standard"
           value={userInfo.region}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, region: e.target.value }))
-          }
+          onChange={(e) => update("region", e.target.value)}
         />
 
         <FormControl component="fieldset">
           <Typography component="span" variant="body2" color="text.secondary">
             {t("questionnaire.blank.field.residenceType.label")}
           </Typography>
-          <RadioGroup
-            row
-            value={userInfo.residenceType}
-            onChange={(e) =>
-              setUserInfo((prev) => ({
-                ...prev,
-                residenceType: e.target.value,
-              }))
-            }
-          >
-            <FormControlLabel
-              value="city"
-              control={<Radio />}
-              label={t("questionnaire.blank.field.residenceType.city")}
-            />
-            <FormControlLabel
-              value="village"
-              control={<Radio />}
-              label={t("questionnaire.blank.field.residenceType.village")}
-            />
+          <RadioGroup row value={userInfo.residenceType} onChange={(e) => update("residenceType", e.target.value)}>
+            <FormControlLabel value="city" control={<Radio />} label={t("questionnaire.blank.field.residenceType.city")} />
+            <FormControlLabel value="village" control={<Radio />} label={t("questionnaire.blank.field.residenceType.village")} />
           </RadioGroup>
         </FormControl>
 
@@ -145,12 +103,10 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
           label={t("questionnaire.blank.field.education.label")}
           helperText={t("questionnaire.blank.field.education.helper")}
           value={userInfo.education}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, education: e.target.value }))
-          }
+          onChange={(e) => update("education", e.target.value)}
           variant="standard"
         >
-          {educationKeys.map((key) => (
+          {EDUCATION_KEYS.map((key) => (
             <MenuItem key={key} value={key}>
               {t("questionnaire.blank.field.education." + key)}
             </MenuItem>
@@ -163,9 +119,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
             helperText={t("questionnaire.blank.field.educationOther.helper")}
             variant="standard"
             value={userInfo.educationOther}
-            onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, educationOther: e.target.value }))
-            }
+            onChange={(e) => update("educationOther", e.target.value)}
           />
         )}
 
@@ -174,42 +128,28 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
           helperText={t("questionnaire.blank.field.placeOfWork.helper")}
           variant="standard"
           value={userInfo.placeOfWork}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, placeOfWork: e.target.value }))
-          }
+          onChange={(e) => update("placeOfWork", e.target.value)}
         />
 
         <TextField
           required
           label={t("questionnaire.blank.field.height.label")}
           helperText={t("questionnaire.blank.field.height.helper")}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">cm</InputAdornment>
-            ),
-          }}
+          InputProps={{ startAdornment: <InputAdornment position="start">cm</InputAdornment> }}
           variant="standard"
           type="number"
           value={userInfo.height}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, height: e.target.value }))
-          }
+          onChange={(e) => update("height", e.target.value)}
         />
         <TextField
           required
           label={t("questionnaire.blank.field.weight.label")}
           helperText={t("questionnaire.blank.field.weight.helper")}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">kg</InputAdornment>
-            ),
-          }}
+          InputProps={{ startAdornment: <InputAdornment position="start">kg</InputAdornment> }}
           variant="standard"
           type="number"
           value={userInfo.weight}
-          onChange={(e) =>
-            setUserInfo((prev) => ({ ...prev, weight: e.target.value }))
-          }
+          onChange={(e) => update("weight", e.target.value)}
         />
       </Box>
       <Button sx={{ marginTop: "20px" }} type="submit">

@@ -1,31 +1,32 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
-import { useTranslation } from "react-i18next";
 
-export const QuestionnaireTest = ({ stage, currentQuestion, nextQuestion }) => {
-  const { title: questionTitle, options } = currentQuestion;
-  console.log(questionTitle);
-  const {
-    i18n: { language },
-  } = useTranslation();
+export const QuestionnaireTest = ({ question, lang, onAnswer, progress }) => {
+  const title = question[`title_${lang}`] ?? question.title_ru ?? question.title_kz ?? "";
+  const options = question.options ?? [];
+
+  const handleSelect = (opt) => {
+    const points = opt.points ?? 0;
+    onAnswer(question.id, opt.id, points);
+  };
 
   return (
     <Box>
-      <Typography textAlign="center" variant="h4">
-        {stage}
+      {progress && (
+        <Typography textAlign="center" variant="body2" color="text.secondary">
+          {progress}
+        </Typography>
+      )}
+      <Typography textAlign="center" marginTop="20px" variant="h6">
+        {title}
       </Typography>
-      <Typography textAlign="center" marginTop="30px">
-        {questionTitle[language]}
-      </Typography>
-      <Box display="flex" flexDirection="column" marginTop="30px">
-        {options[language].map((answer, index) => (
+      <Box display="flex" flexDirection="column" marginTop="30px" gap={1}>
+        {options.map((opt) => (
           <Button
-            key={index}
-            onClick={() =>
-              nextQuestion(questionTitle["ru"], options["ru"][index])
-            }
+            key={opt.id}
+            variant="outlined"
+            onClick={() => handleSelect(opt)}
           >
-            {answer}
+            {opt[`text_${lang}`] ?? opt.text_ru ?? opt.text_kz ?? opt.id}
           </Button>
         ))}
       </Box>

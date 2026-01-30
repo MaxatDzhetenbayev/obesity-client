@@ -4,13 +4,17 @@ import "./index.css";
 import "./i18n";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { BaseLayout } from "./layouts/BaseLayout/BaseLayout.jsx";
+import { AdminLayout } from "./layouts/AdminLayout/AdminLayout.jsx";
 import { MainPage } from "./pages/MainPage.jsx";
 import { QuestionnairePage } from "./pages/QuestionnairePage.jsx";
 import { CalculatorPage } from "./pages/CalculatorPage.jsx";
 import { FaqPage } from "./pages/FaqPage.jsx";
-import  './firebaseConfig.js'
+import "./firebaseConfig.js";
 import { FactsPage } from "./pages/FactsPage.jsx";
 import { AdminPage } from "./pages/AdminPage.jsx";
+import { AdminQuestionnairesPage } from "./pages/admin/AdminQuestionnairesPage.jsx";
+import { AdminQuestionsPage } from "./pages/admin/AdminQuestionsPage.jsx";
+import { AdminAnswerOptionsPage } from "./pages/admin/AdminAnswerOptionsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +42,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <AdminPage />,
-      }
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <AdminPage /> },
+          { path: "questionnaires", element: <AdminQuestionnairesPage /> },
+          { path: "questionnaires/:questionnaireId/questions", element: <AdminQuestionsPage /> },
+          { path: "questions/:questionId/options", element: <AdminAnswerOptionsPage /> },
+        ],
+      },
     ],
   },
 ]);
