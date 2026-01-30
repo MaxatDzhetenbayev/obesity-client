@@ -4,7 +4,6 @@ import { QuestionnaireBlank } from "../components/Questionnaire/QuestionnaireBla
 import { Container, Paper } from "@mui/material";
 import { QuestionnaireTest } from "../components/Questionnaire/QuestionnaireTest/QuestionnaireTest";
 import { QuestionnaireResults } from "../components/Questionnaire/QuestionnaireResults/QuestionnaireResults";
-import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebaseConfig";
@@ -13,14 +12,18 @@ import { questionsData } from "../constants";
 const stagesList = ["knowledge", "attitude", "action"];
 
 export const QuestionnairePage = () => {
-  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
     age: "",
+    gender: "",
     nationality: "",
+    region: "",
+    residenceType: "",
+    education: "",
+    educationOther: "",
+    placeOfWork: "",
     height: "",
     weight: "",
-    pulse: "",
   });
 
   const [isStarted, setIsStarted] = useState(false);

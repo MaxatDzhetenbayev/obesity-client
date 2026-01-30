@@ -1,24 +1,29 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Box,
   Button,
   Container,
+  FormControl,
+  FormControlLabel,
   InputAdornment,
   MenuItem,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
 
-const nationality = [
-  "questionnaire.blank.nationality.kazakh",
-  "questionnaire.blank.nationality.russian",
-  "questionnaire.blank.nationality.uzbek",
-  "questionnaire.blank.nationality.tajik",
-  "questionnaire.blank.nationality.kyrgyz",
-  "questionnaire.blank.nationality.turkmen",
-  "questionnaire.blank.nationality.other",
+const nationalityKeys = [
+  "kazakh",
+  "russian",
+  "uzbek",
+  "tajik",
+  "kyrgyz",
+  "turkmen",
+  "other",
 ];
+
+const educationKeys = ["higher", "secondary_special", "secondary", "other"];
 
 export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
   const { t } = useTranslation();
@@ -37,90 +42,175 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
-          gap: "40px",
+          flexDirection: "column",
+          gap: 2,
           marginTop: "20px",
+          maxWidth: 480,
+          width: "100%",
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <TextField
+          required
+          label={t("questionnaire.blank.field.age.label")}
+          helperText={t("questionnaire.blank.field.age.helper")}
+          variant="standard"
+          value={userInfo.age}
+          type="number"
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, age: e.target.value }))
+          }
+        />
 
-          <TextField
-            required
-            label={t("questionnaire.blank.field.age.label")}
-            helperText={t("questionnaire.blank.field.age.helper")}
-            variant="standard"
-            value={userInfo.age}
-            type="number"
+        <FormControl component="fieldset" required>
+          <Typography component="span" variant="body2" color="text.secondary">
+            {t("questionnaire.blank.field.gender.label")}
+          </Typography>
+          <RadioGroup
+            row
+            value={userInfo.gender}
             onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, age: e.target.value }))
+              setUserInfo((prev) => ({ ...prev, gender: e.target.value }))
             }
-          />
-          <TextField
-            select
-            required
-            label={t("questionnaire.blank.field.nationality.label")}
-            helperText={t("questionnaire.blank.field.nationality.helper")}
-            value={t(userInfo.nationality)}
+          >
+            <FormControlLabel
+              value="male"
+              control={<Radio />}
+              label={t("questionnaire.blank.field.gender.male")}
+            />
+            <FormControlLabel
+              value="female"
+              control={<Radio />}
+              label={t("questionnaire.blank.field.gender.female")}
+            />
+          </RadioGroup>
+        </FormControl>
+
+        <TextField
+          select
+          required
+          label={t("questionnaire.blank.field.nationality.label")}
+          helperText={t("questionnaire.blank.field.nationality.helper")}
+          value={userInfo.nationality}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, nationality: e.target.value }))
+          }
+          variant="standard"
+        >
+          {nationalityKeys.map((key) => (
+            <MenuItem key={key} value={key}>
+              {t("questionnaire.blank.nationality." + key)}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          label={t("questionnaire.blank.field.region.label")}
+          helperText={t("questionnaire.blank.field.region.helper")}
+          variant="standard"
+          value={userInfo.region}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, region: e.target.value }))
+          }
+        />
+
+        <FormControl component="fieldset">
+          <Typography component="span" variant="body2" color="text.secondary">
+            {t("questionnaire.blank.field.residenceType.label")}
+          </Typography>
+          <RadioGroup
+            row
+            value={userInfo.residenceType}
             onChange={(e) =>
               setUserInfo((prev) => ({
                 ...prev,
-                nationality: t(e.target.value),
+                residenceType: e.target.value,
               }))
             }
-            variant="standard"
           >
-            {nationality.map((option) => (
-              <MenuItem key={option} value={t(option)}>
-                {t(option)}
-              </MenuItem>
-            ))}
-          </TextField>
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <FormControlLabel
+              value="city"
+              control={<Radio />}
+              label={t("questionnaire.blank.field.residenceType.city")}
+            />
+            <FormControlLabel
+              value="village"
+              control={<Radio />}
+              label={t("questionnaire.blank.field.residenceType.village")}
+            />
+          </RadioGroup>
+        </FormControl>
+
+        <TextField
+          select
+          label={t("questionnaire.blank.field.education.label")}
+          helperText={t("questionnaire.blank.field.education.helper")}
+          value={userInfo.education}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, education: e.target.value }))
+          }
+          variant="standard"
+        >
+          {educationKeys.map((key) => (
+            <MenuItem key={key} value={key}>
+              {t("questionnaire.blank.field.education." + key)}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        {userInfo.education === "other" && (
           <TextField
-            required
-            label={t("questionnaire.blank.field.height.label")}
-            helperText={t("questionnaire.blank.field.height.helper")}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">cm</InputAdornment>
-              ),
-            }}
+            label={t("questionnaire.blank.field.educationOther.label")}
+            helperText={t("questionnaire.blank.field.educationOther.helper")}
             variant="standard"
-            type="number"
+            value={userInfo.educationOther}
             onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, height: e.target.value }))
+              setUserInfo((prev) => ({ ...prev, educationOther: e.target.value }))
             }
-            value={userInfo.height}
           />
-          <TextField
-            required
-            label={t("questionnaire.blank.field.weight.label")}
-            helperText={t("questionnaire.blank.field.weight.helper")}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">kg</InputAdornment>
-              ),
-            }}
-            variant="standard"
-            type="number"
-            onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, weight: e.target.value }))
-            }
-            value={userInfo.weight}
-          />
-          <TextField
-            required
-            label={t("questionnaire.blank.field.pulse.label")}
-            helperText={t("questionnaire.blank.field.pulse.helper")}
-            variant="standard"
-            type="number"
-            onChange={(e) =>
-              setUserInfo((prev) => ({ ...prev, pulse: e.target.value }))
-            }
-            value={userInfo.pulse}
-          />
-        </Box>
+        )}
+
+        <TextField
+          label={t("questionnaire.blank.field.placeOfWork.label")}
+          helperText={t("questionnaire.blank.field.placeOfWork.helper")}
+          variant="standard"
+          value={userInfo.placeOfWork}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, placeOfWork: e.target.value }))
+          }
+        />
+
+        <TextField
+          required
+          label={t("questionnaire.blank.field.height.label")}
+          helperText={t("questionnaire.blank.field.height.helper")}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">cm</InputAdornment>
+            ),
+          }}
+          variant="standard"
+          type="number"
+          value={userInfo.height}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, height: e.target.value }))
+          }
+        />
+        <TextField
+          required
+          label={t("questionnaire.blank.field.weight.label")}
+          helperText={t("questionnaire.blank.field.weight.helper")}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">kg</InputAdornment>
+            ),
+          }}
+          variant="standard"
+          type="number"
+          value={userInfo.weight}
+          onChange={(e) =>
+            setUserInfo((prev) => ({ ...prev, weight: e.target.value }))
+          }
+        />
       </Box>
       <Button sx={{ marginTop: "20px" }} type="submit">
         {t("questionnaire.start")}

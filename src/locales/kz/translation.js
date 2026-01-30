@@ -133,21 +133,47 @@ const translation = {
           label: "Жасы",
           helper: "Жасыңызды енгізіңіз",
         },
+        gender: {
+          label: "Жынысы",
+          male: "Ер",
+          female: "Әйел",
+        },
         nationality: {
           label: "Ұлты",
           helper: "Өз ұлтыңызды таңдаңыз",
         },
+        region: {
+          label: "Аймақ",
+          helper: "Тұратын аймағыңызды көрсетіңіз",
+        },
+        residenceType: {
+          label: "Тұрақ",
+          city: "Қала",
+          village: "Ауыл",
+        },
+        education: {
+          label: "Білім",
+          helper: "Білім деңгейін таңдаңыз",
+          higher: "Жоғары",
+          secondary_special: "Орта арнайы",
+          secondary: "Орта",
+          other: "Басқа",
+        },
+        educationOther: {
+          label: "Басқа (нақтылаңыз)",
+          helper: "Білім деңгейіңізді көрсетіңіз",
+        },
+        placeOfWork: {
+          label: "Жұмыс орны",
+          helper: "Жұмыс орныңызды көрсетіңіз",
+        },
         height: {
-          label: "Бойы",
+          label: "Бойы (см)",
           helper: "Бойыңызды енгізіңіз",
         },
         weight: {
-          label: "Салмақ",
+          label: "Салмақ (кг)",
           helper: "Салмағыңызды енгізіңіз",
-        },
-        pulse: {
-          label: "Пульс",
-          helper: "Жүрек соғу жиілігін енгізіңіз",
         },
       },
 
