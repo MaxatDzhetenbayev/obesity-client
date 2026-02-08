@@ -16,8 +16,13 @@ import {
 const NATIONALITY_KEYS = ["kazakh", "russian", "uzbek", "tajik", "kyrgyz", "turkmen", "other"];
 const EDUCATION_KEYS = ["higher", "secondary_special", "secondary", "other"];
 
-export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
-  const { t } = useTranslation();
+export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selectedQuestionnaire }) => {
+  const { t, i18n: { language } } = useTranslation();
+  const lang = language === "kz" ? "kz" : "ru";
+  const title = selectedQuestionnaire
+    ? (selectedQuestionnaire[`title_${lang}`] || selectedQuestionnaire.title_ru || selectedQuestionnaire.title_kz)
+    : t("questionnaire.title");
+  const infoText = t("questionnaire.info").replace(/\{\{title\}\}/g, title);
 
   const update = (key, value) => setUserInfo((prev) => ({ ...prev, [key]: value }));
 
@@ -28,7 +33,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart }) => {
     >
       <Container maxWidth="sm" disableGutters>
         <Typography textAlign="center" variant="body2" color="text.secondary">
-          {t("questionnaire.info")}
+          {infoText}
         </Typography>
       </Container>
       <Typography sx={{ marginTop: "10px" }} textAlign="center" variant="h6">

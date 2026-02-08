@@ -234,6 +234,7 @@ export const QuestionnairePage = () => {
             userInfo={userInfo}
             setUserInfo={setUserInfo}
             handleStart={handleStart}
+            selectedQuestionnaire={selectedQuestionnaire}
           />
         )}
 
