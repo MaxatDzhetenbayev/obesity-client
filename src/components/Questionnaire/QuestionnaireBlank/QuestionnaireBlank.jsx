@@ -57,10 +57,12 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.age}
           type="number"
           onChange={(e) => update("age", e.target.value)}
+          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
         <FormControl component="fieldset" required>
-          <Typography component="span" variant="body2" color="text.secondary">
+          <Typography component="span" variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
             {t("questionnaire.blank.field.gender.label")}
           </Typography>
           <RadioGroup row value={userInfo.gender} onChange={(e) => update("gender", e.target.value)}>
@@ -77,6 +79,8 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.nationality}
           onChange={(e) => update("nationality", e.target.value)}
           variant="standard"
+          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         >
           {NATIONALITY_KEYS.map((key) => (
             <MenuItem key={key} value={key}>
@@ -91,10 +95,12 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           variant="standard"
           value={userInfo.region}
           onChange={(e) => update("region", e.target.value)}
+          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
         <FormControl component="fieldset">
-          <Typography component="span" variant="body2" color="text.secondary">
+          <Typography component="span" variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
             {t("questionnaire.blank.field.residenceType.label")}
           </Typography>
           <RadioGroup row value={userInfo.residenceType} onChange={(e) => update("residenceType", e.target.value)}>
@@ -110,6 +116,8 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.education}
           onChange={(e) => update("education", e.target.value)}
           variant="standard"
+          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         >
           {EDUCATION_KEYS.map((key) => (
             <MenuItem key={key} value={key}>
@@ -125,6 +133,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
             variant="standard"
             value={userInfo.educationOther}
             onChange={(e) => update("educationOther", e.target.value)}
+            FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
           />
         )}
 
@@ -134,6 +143,8 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           variant="standard"
           value={userInfo.placeOfWork}
           onChange={(e) => update("placeOfWork", e.target.value)}
+          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
         <TextField
@@ -145,6 +156,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           type="number"
           value={userInfo.height}
           onChange={(e) => update("height", e.target.value)}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
         <TextField
           required
@@ -155,6 +167,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           type="number"
           value={userInfo.weight}
           onChange={(e) => update("weight", e.target.value)}
+          FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
       </Box>
       <Button sx={{ marginTop: "20px" }} type="submit">
