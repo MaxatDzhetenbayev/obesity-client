@@ -19,11 +19,25 @@
 }
 
 .scaleItemActive {
-  background-color: #1976d2;
   color: #fff;
   font-weight: 600;
   position: relative;
   padding-left: 28px;
+}
+
+/* Высокий уровень — зелёный */
+.scaleItemActiveHigh {
+  background-color: #2e7d32;
+}
+
+/* Средний уровень — синий */
+.scaleItemActiveMedium {
+  background-color: #1976d2;
+}
+
+/* Низкий уровень — красный */
+.scaleItemActiveLow {
+  background-color: #c62828;
 }
 
 .scaleItemActive::before {

@@ -40,6 +40,9 @@ export const QuestionnaireResults = ({ totalScore, levels, lang, handleSendResul
                 key={i}
                 className={clsn(styles.scaleItem, {
                   [styles.scaleItemActive]: i === currentLevelIndex,
+                  [styles.scaleItemActiveHigh]: i === currentLevelIndex && i === 0,
+                  [styles.scaleItemActiveMedium]: i === currentLevelIndex && i > 0 && i < levelList.length - 1,
+                  [styles.scaleItemActiveLow]: i === currentLevelIndex && i === levelList.length - 1,
                 })}
               >
                 <span>{lev[`label_${lang}`] ?? lev.label_ru ?? lev.label_kz ?? `${lev.min}–${lev.max}`}</span>
