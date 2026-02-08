@@ -3,8 +3,9 @@
 }
 .whats__obesity h1 {
   color: var(--main-color);
-  font-size: clamp(24px, 3vw, 28px);
-  font-weight: 700;
+  font-size: clamp(28px, 3vw, 32px);
+  font-weight: 900;
+  font-style: italic;
 }
 .whats__obesity p {
   margin-top: 25px;
