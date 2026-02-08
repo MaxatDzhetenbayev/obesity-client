@@ -1,6 +1,6 @@
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { utils, writeFile } from "xlsx";
 import {
@@ -28,7 +28,9 @@ export const AdminPage = () => {
   useEffect(() => {
     const load = async () => {
       const qSnap = await getDocs(collection(db, "questionnaires"));
-      setQuestionnaires(qSnap.docs.map((d) => ({ id: d.id, ...d.data() })));
+      const items = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      items.sort((a, b) => (a.order ?? 999999) - (b.order ?? 999999));
+      setQuestionnaires(items);
     };
     load();
   }, []);

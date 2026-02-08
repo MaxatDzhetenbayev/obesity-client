@@ -43,7 +43,9 @@ export const QuestionnairePage = () => {
     const load = async () => {
       try {
         const qSnap = await getDocs(collection(db, "questionnaires"));
-        setQuestionnaires(qSnap.docs.map((d) => ({ id: d.id, ...d.data() })));
+        const items = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        items.sort((a, b) => (a.order ?? 999999) - (b.order ?? 999999));
+        setQuestionnaires(items);
       } catch (e) {
         setError(e.message);
       } finally {

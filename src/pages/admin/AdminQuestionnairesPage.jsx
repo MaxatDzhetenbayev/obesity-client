@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { collection, getDocs, doc, setDoc, deleteDoc, addDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 
@@ -39,7 +41,22 @@ export const AdminQuestionnairesPage = () => {
 
   const load = async () => {
     const snap = await getDocs(collection(db, "questionnaires"));
-    setList(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+    const items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    items.sort((a, b) => (a.order ?? 999999) - (b.order ?? 999999));
+    setList(items);
+  };
+
+  const moveOrder = async (index, direction) => {
+    if (direction === "up" && index <= 0) return;
+    if (direction === "down" && index >= list.length - 1) return;
+    const otherIndex = direction === "up" ? index - 1 : index + 1;
+    const a = list[index];
+    const b = list[otherIndex];
+    const orderA = a.order ?? 999999;
+    const orderB = b.order ?? 999999;
+    await setDoc(doc(db, "questionnaires", a.id), { order: orderB }, { merge: true });
+    await setDoc(doc(db, "questionnaires", b.id), { order: orderA }, { merge: true });
+    load();
   };
 
   useEffect(() => {
@@ -94,11 +111,13 @@ export const AdminQuestionnairesPage = () => {
   };
 
   const save = async () => {
+    const maxOrder = list.length === 0 ? -1 : Math.max(...list.map((q) => q.order ?? -1));
     const payload = {
       title_ru: form.title_ru,
       title_kz: form.title_kz,
       description_ru: form.description_ru,
       description_kz: form.description_kz,
+      order: editingId ? (list.find((q) => q.id === editingId)?.order ?? list.length) : maxOrder + 1,
       levels: (form.levels || []).map((l) => ({
         min: Number(l.min) ?? 0,
         max: Number(l.max) ?? 0,
@@ -130,6 +149,7 @@ export const AdminQuestionnairesPage = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
+            <TableCell>Место</TableCell>
             <TableCell>ID</TableCell>
             <TableCell>Название (RU)</TableCell>
             <TableCell>Название (KZ)</TableCell>
@@ -137,8 +157,19 @@ export const AdminQuestionnairesPage = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((row) => (
+          {list.map((row, index) => (
             <TableRow key={row.id}>
+              <TableCell>
+                <IconButton size="small" onClick={() => moveOrder(index, "up")} disabled={index === 0} title="Поднять">
+                  <ArrowUpwardIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" onClick={() => moveOrder(index, "down")} disabled={index === list.length - 1} title="Опустить">
+                  <ArrowDownwardIcon fontSize="small" />
+                </IconButton>
+                <Typography component="span" variant="body2" color="text.secondary" sx={{ ml: 0.5 }}>
+                  {row.order ?? "—"}
+                </Typography>
+              </TableCell>
               <TableCell>{row.id}</TableCell>
               <TableCell>{row.title_ru || "—"}</TableCell>
               <TableCell>{row.title_kz || "—"}</TableCell>
