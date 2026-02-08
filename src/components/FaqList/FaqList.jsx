@@ -88,7 +88,7 @@ export const FaqList = () => {
             className={styles.questionItem_button}
             onClick={() => handleSetView(item.question())}
           >
-            <p>{item.question()}</p>
+            <p className={styles.questionItem_button_text}>{item.question()}</p>
           </motion.button>
           <motion.div variants={variant} className={styles.questionItem_info}>
             <p style={{ padding: "20px 0px" }}>{item.answer()}</p>

@@ -17,8 +17,6 @@
   width: 100%;
   border: none;
   padding: 20px;
-  font-size: clamp(18px, 2vw, 22px);
-  font-weight: 600;
   text-align: left;
   cursor: pointer;
 }
@@ -28,6 +26,11 @@
   border-top: none;
 
   text-align: justify;
+}
+
+.questionItem_button_text {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 600;
 }
 
 .questionItem_info p {
