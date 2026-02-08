@@ -24,6 +24,51 @@ export const AdminPage = () => {
   const [questions, setQuestions] = useState([]);
   const [answerOptionsMap, setAnswerOptionsMap] = useState({});
   const [visitData, setVisitData] = useState([]);
+  const [visitPeriod, setVisitPeriod] = useState("week"); // week | month | 3months | year | all
+
+  const parseVisitDate = (dateStr) => {
+    if (!dateStr) return null;
+    const d = String(dateStr).trim();
+    const parts = d.split(/[.\-/]/).map((p) => parseInt(p, 10));
+    if (parts.length >= 3) {
+      const [a, b, c] = parts;
+      if (d.includes(".")) return new Date(c, b - 1, a);
+      if (d.includes("-")) return new Date(a, b - 1, c);
+      return new Date(b, a - 1, c);
+    }
+    const parsed = Date.parse(d);
+    return isNaN(parsed) ? null : new Date(parsed);
+  };
+
+  const getFilteredVisitData = () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let from = new Date(0);
+    if (visitPeriod === "week") {
+      from = new Date(today);
+      from.setDate(from.getDate() - 7);
+    } else if (visitPeriod === "month") {
+      from = new Date(today);
+      from.setMonth(from.getMonth() - 1);
+    } else if (visitPeriod === "3months") {
+      from = new Date(today);
+      from.setMonth(from.getMonth() - 3);
+    } else if (visitPeriod === "year") {
+      from = new Date(today);
+      from.setFullYear(from.getFullYear() - 1);
+    }
+    const filtered = visitData.filter((item) => {
+      const date = parseVisitDate(item.date);
+      if (!date) return false;
+      const dayStart = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      return dayStart >= from && dayStart <= today;
+    });
+    return filtered.sort((a, b) => {
+      const da = parseVisitDate(a.date)?.getTime() ?? 0;
+      const db = parseVisitDate(b.date)?.getTime() ?? 0;
+      return da - db;
+    });
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -138,12 +183,13 @@ export const AdminPage = () => {
       title: { display: true, text: "Статистика посещения пользователей" },
     },
   };
+  const filteredVisits = getFilteredVisitData();
   const barData = {
-    labels: visitData.map((item) => item.date),
+    labels: filteredVisits.map((item) => item.date),
     datasets: [
       {
         label: "Dataset 1",
-        data: visitData.map((item) => item.visitCount),
+        data: filteredVisits.map((item) => item.visitCount),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
@@ -180,7 +226,21 @@ export const AdminPage = () => {
           Нет сохранённых результатов по этому опроснику. Кнопка станет активной после того, как пользователи пройдут опрос и отправят ответы.
         </Typography>
       )}
-      <Bar options={options} data={barData} sx={{ mt: 4 }} />
+      <FormControl sx={{ minWidth: 200, display: "block", mt: 3, mb: 1 }} size="small">
+        <InputLabel>Период статистики посещений</InputLabel>
+        <Select
+          value={visitPeriod}
+          label="Период статистики посещений"
+          onChange={(e) => setVisitPeriod(e.target.value)}
+        >
+          <MenuItem value="week">Неделя</MenuItem>
+          <MenuItem value="month">Месяц</MenuItem>
+          <MenuItem value="3months">3 месяца</MenuItem>
+          <MenuItem value="year">Год</MenuItem>
+          <MenuItem value="all">Весь период</MenuItem>
+        </Select>
+      </FormControl>
+      <Bar options={options} data={barData} sx={{ mt: 2 }} />
     </Container>
   );
 };
