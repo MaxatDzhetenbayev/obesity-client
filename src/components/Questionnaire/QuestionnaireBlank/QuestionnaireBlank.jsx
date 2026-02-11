@@ -22,7 +22,9 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
   const title = selectedQuestionnaire
     ? (selectedQuestionnaire[`title_${lang}`] || selectedQuestionnaire.title_ru || selectedQuestionnaire.title_kz)
     : t("questionnaire.title");
-  const infoText = t("questionnaire.info").replace(/\{\{title\}\}/g, title);
+  const inviteText = t("questionnaire.invite");
+  const topicText = t("questionnaire.topic").replace(/\{\{title\}\}/g, title);
+  const instructionText = t("questionnaire.instruction");
 
   const update = (key, value) => setUserInfo((prev) => ({ ...prev, [key]: value }));
 
@@ -31,14 +33,45 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
       onSubmit={handleStart}
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Container maxWidth="sm" disableGutters>
-        <Typography textAlign="center" variant="body2" color="text.secondary">
-          {infoText}
+      <Container maxWidth="sm" disableGutters sx={{ mb: 3 }}>
+        <Typography
+          textAlign="center"
+          variant="h5"
+          sx={{ fontWeight: 700, textTransform: "uppercase", mb: 1 }}
+        >
+          {t("questionnaire.title")}
+        </Typography>
+        <Typography
+          textAlign="center"
+          variant="h6"
+          sx={{ fontWeight: 700, mb: 1 }}
+        >
+          {t("questionnaire.text")}
+        </Typography>
+        <Typography textAlign="center" variant="body1" sx={{ mb: 0.5 }}>
+          {inviteText}{" "}
+          <Box
+            component="span"
+            sx={{
+              fontWeight: 900,
+              fontSize: "1.05rem",
+            }}
+          >
+            {topicText}
+          </Box>
+        </Typography>
+        <Typography textAlign="center" variant="body1" sx={{ mb: 1 }}>
+          {instructionText}
+        </Typography>
+        <Typography
+          textAlign="center"
+          variant="body2"
+          color="text.secondary"
+          sx={{ fontStyle: "italic", textDecoration: "underline" }}
+        >
+          {t("questionnaire.anonymousNote")}
         </Typography>
       </Container>
-      <Typography sx={{ marginTop: "10px" }} textAlign="center" variant="h6">
-        {t("questionnaire.title")}
-      </Typography>
       <Box
         sx={{
           display: "flex",
