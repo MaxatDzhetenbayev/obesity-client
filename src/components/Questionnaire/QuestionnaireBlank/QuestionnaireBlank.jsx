@@ -90,12 +90,12 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.age}
           type="number"
           onChange={(e) => update("age", e.target.value)}
-          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          InputLabelProps={{ sx: { fontWeight: 700, color: "black", fontSize: "1rem" } }}
           FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
         <FormControl component="fieldset" required>
-          <Typography component="span" variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+          <Typography component="span" variant="body2" sx={{ fontWeight: 700, color: "black", fontSize: "1rem" }}>
             {t("questionnaire.blank.field.gender.label")}
           </Typography>
           <RadioGroup row value={userInfo.gender} onChange={(e) => update("gender", e.target.value)}>
@@ -112,7 +112,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.nationality}
           onChange={(e) => update("nationality", e.target.value)}
           variant="standard"
-          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          InputLabelProps={{ sx: { fontWeight: 700, color: "black", fontSize: "1rem" } }}
           FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         >
           {NATIONALITY_KEYS.map((key) => (
@@ -128,12 +128,12 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           variant="standard"
           value={userInfo.region}
           onChange={(e) => update("region", e.target.value)}
-          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          InputLabelProps={{ sx: { fontWeight: 700, color: "black", fontSize: "1rem" } }}
           FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
         <FormControl component="fieldset">
-          <Typography component="span" variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+          <Typography component="span" variant="body2" sx={{ fontWeight: 700, color: "black", fontSize: "1rem" }}>
             {t("questionnaire.blank.field.residenceType.label")}
           </Typography>
           <RadioGroup row value={userInfo.residenceType} onChange={(e) => update("residenceType", e.target.value)}>
@@ -149,7 +149,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           value={userInfo.education}
           onChange={(e) => update("education", e.target.value)}
           variant="standard"
-          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          InputLabelProps={{ sx: { fontWeight: 700, color: "black", fontSize: "1rem" } }}
           FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         >
           {EDUCATION_KEYS.map((key) => (
@@ -176,7 +176,7 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
           variant="standard"
           value={userInfo.placeOfWork}
           onChange={(e) => update("placeOfWork", e.target.value)}
-          InputLabelProps={{ sx: { fontWeight: 600 } }}
+          InputLabelProps={{ sx: { fontWeight: 700, color: "black", fontSize: "1rem" } }}
           FormHelperTextProps={{ sx: { fontSize: "0.875rem" } }}
         />
 
