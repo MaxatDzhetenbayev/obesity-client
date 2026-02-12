@@ -57,8 +57,9 @@ export const QuestionnaireBlank = ({ userInfo, setUserInfo, handleStart, selecte
               fontSize: "1.05rem",
             }}
           >
-            {topicText}
+            {topicText} 
           </Box>
+          {lang === "kz" ? t("questionnaire.topicEnd") : ""}
         </Typography>
         <Typography textAlign="center" variant="body1" sx={{ mb: 1 }}>
           {instructionText}
